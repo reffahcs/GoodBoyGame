@@ -7,11 +7,11 @@ public class GachaEngine
     private static readonly Random rand = new Random();
 
     // ==========================================================================
-    // 🔮 THE DETERMINISTIC MASTER ENGAGEMENT LOOP (NO COMPROMISES)
+    // 🔮 THE DETERMINISTIC MASTER ENGAGEMENT LOOP (DUAL BANNER SYSTEM)
     // ==========================================================================
     public void OpenMenu(
         List<RPGHero> roster,
-        List<HeroBlueprint> heroRegistry, // <--- NEW: Dynamic Hero Pool
+        List<HeroBlueprint> heroRegistry,
         List<GearBlueprint> itemRegistry,
         InventoryManager inventory,
         ref int tickets,
@@ -44,25 +44,24 @@ public class GachaEngine
             Console.WriteLine(
                 "--------------------------------------------------------------------------"
             );
-            Console.WriteLine(" [1] Perform Single Gacha Pull (Costs 1 Ticket)");
+            Console.WriteLine(" [1] Summon Hero Companion (Costs 1 Ticket)");
+            Console.WriteLine(" [2] Summon Gear & Equipment (Costs 1 Ticket)");
             Console.WriteLine(" [B] Return to Main Hub Menu");
             Console.WriteLine(
                 "=========================================================================="
             );
             Console.Write("Selection: ");
 
-            // Immediate reaction without needing Enter
             ConsoleKeyInfo choice = Console.ReadKey(true);
 
             if (choice.Key == ConsoleKey.B)
             {
                 inGachaMenu = false;
             }
-            else if (
-                choice.Key == ConsoleKey.D1
-                || choice.Key == ConsoleKey.NumPad1
-                || choice.Key == ConsoleKey.Enter
-            )
+            // ==========================================
+            // BANNER 1: HERO PULL
+            // ==========================================
+            else if (choice.Key == ConsoleKey.D1 || choice.Key == ConsoleKey.NumPad1)
             {
                 bool keepRolling = true;
                 while (keepRolling)
@@ -79,9 +78,56 @@ public class GachaEngine
                     }
 
                     tickets--;
-                    ExecuteThreeTieredRoll(roster, heroRegistry, itemRegistry, inventory);
+                    ExecuteHeroRoll(roster, heroRegistry);
 
-                    Console.WriteLine("\nPress [Enter] to roll again, or [B] to return...");
+                    Console.WriteLine("\nPress [Enter] to roll HERO again, or [B] to return...");
+
+                    while (Console.KeyAvailable)
+                    {
+                        Console.ReadKey(true);
+                    }
+                    ConsoleKeyInfo rollChoice = Console.ReadKey(true);
+
+                    if (rollChoice.Key == ConsoleKey.B)
+                    {
+                        keepRolling = false;
+                        inGachaMenu = false;
+                    }
+                    else if (rollChoice.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine(
+                            "\n--------------------------------------------------------------------------"
+                        );
+                    }
+                    else
+                    {
+                        keepRolling = false;
+                    }
+                }
+            }
+            // ==========================================
+            // BANNER 2: GEAR PULL
+            // ==========================================
+            else if (choice.Key == ConsoleKey.D2 || choice.Key == ConsoleKey.NumPad2)
+            {
+                bool keepRolling = true;
+                while (keepRolling)
+                {
+                    if (tickets < 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "\n🚨 Insufficient tickets! Clear campaign sectors or check rewards."
+                        );
+                        Console.ResetColor();
+                        System.Threading.Thread.Sleep(1000);
+                        break;
+                    }
+
+                    tickets--;
+                    ExecuteGearRoll(itemRegistry, inventory);
+
+                    Console.WriteLine("\nPress [Enter] to roll GEAR again, or [B] to return...");
 
                     while (Console.KeyAvailable)
                     {
@@ -114,18 +160,16 @@ public class GachaEngine
         }
     }
 
-    private void ExecuteThreeTieredRoll(
-        List<RPGHero> roster,
-        List<HeroBlueprint> heroRegistry,
-        List<GearBlueprint> itemRegistry,
-        InventoryManager inventory
-    )
+    // ==========================================================================
+    // EXECUTION & REWARD LOGIC
+    // ==========================================================================
+    private void ExecuteHeroRoll(List<RPGHero> roster, List<HeroBlueprint> heroRegistry)
     {
-        Console.WriteLine("\n🎬 Initiating roll sequence...");
+        Console.WriteLine("\n🎬 Initiating Hero summon sequence...");
         System.Threading.Thread.Sleep(500);
 
         int winRoll = rand.Next(1, 101);
-        if (winRoll > 40)
+        if (winRoll > 100)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("💨 A swing and a miss! Better luck on the next pull.");
@@ -133,20 +177,32 @@ public class GachaEngine
             return;
         }
 
-        if (itemRegistry == null || itemRegistry.Count == 0)
+        AwardHeroPrize(roster, heroRegistry);
+    }
+
+    private void ExecuteGearRoll(List<GearBlueprint> itemRegistry, InventoryManager inventory)
+    {
+        Console.WriteLine("\n🎬 Initiating Gear summon sequence...");
+        System.Threading.Thread.Sleep(500);
+
+        int winRoll = rand.Next(1, 101);
+        if (winRoll > 25)
         {
-            AwardHeroPrize(roster, heroRegistry);
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("💨 A swing and a miss! Better luck on the next pull.");
+            Console.ResetColor();
             return;
         }
 
-        int prizeTypeRoll = rand.Next(1, 3);
-        if (prizeTypeRoll == 1)
+        if (itemRegistry != null && itemRegistry.Count > 0)
         {
-            AwardHeroPrize(roster, heroRegistry);
+            AwardItemPrize(itemRegistry, inventory);
         }
         else
         {
-            AwardItemPrize(itemRegistry, inventory);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("🚨 Error: Gear Registry is empty.");
+            Console.ResetColor();
         }
     }
 
@@ -156,7 +212,6 @@ public class GachaEngine
         float rolledHP = 105f;
         float rolledAtk = 13f;
 
-        // Dynamic Roll Logic
         if (heroRegistry != null && heroRegistry.Count > 0)
         {
             int index = rand.Next(heroRegistry.Count);
@@ -221,6 +276,7 @@ public class GachaEngine
         Console.WriteLine(
             $"   ↳ Stats: +{rolledGear.AddedHP} Max HP | +{rolledGear.AddedAttack} Base ATK"
         );
+
         Console.ForegroundColor = ConsoleColor.DarkGray;
         Console.WriteLine(
             "   ↳ Placement: Sent directly into your unequipped gear backpack storage."
