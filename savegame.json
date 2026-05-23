@@ -1,0 +1,456 @@
+{
+  "Tickets": 100,
+  "Gold": 49854000,
+  "XPChips": 49157052,
+  "Roster": [
+    {
+      "Name": "Sherlock Bones",
+      "Rarity": "Stray",
+      "Level": 53,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Bark Twain",
+      "Rarity": "Packmate",
+      "Level": 11,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Indiana Bones",
+      "Rarity": "Stray",
+      "Level": 10,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Professor Paws",
+      "Rarity": "Packmate",
+      "Level": 10,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Jane Pawsten",
+      "Rarity": "Packmate",
+      "Level": 10,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Mutt-zo Ball",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 2,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Barkley",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Jane Pawsten",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Dr. Chew-little",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Bark Twain",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 2,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Sub-Woofer",
+      "Rarity": "Scout",
+      "Level": 1,
+      "Quantity": 2,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Napoleon Bone-aparte",
+      "Rarity": "Tracker",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Flea-o-patra",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Dr. Chew-little",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "The Dog-tor",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Bark Twain",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Sub-Woofer",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 2,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Winston Chewchill",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Deputy Drool",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Barkley",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Sir Loin",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Santa Paws",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Sherlock Bones",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 2,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Scruff McGruff",
+      "Rarity": "Tracker",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "William Shakespaw",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Indiana Bones",
+      "Rarity": "Scout",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "The Bark-itect",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "The Dog-tor",
+      "Rarity": "Scout",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "The Dog-tor",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "William Shakespaw",
+      "Rarity": "Scout",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Jane Pawsten",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    },
+    {
+      "Name": "Indiana Bones",
+      "Rarity": "Packmate",
+      "Level": 1,
+      "Quantity": 1,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
+    }
+  ],
+  "UnequippedBackpack": []
+}

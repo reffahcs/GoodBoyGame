@@ -1,0 +1,128 @@
+[
+  {
+    "Name": "Sherlock Bones",
+    "BaseHP": 105.0,
+    "BaseAttack": 14.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Indiana Bones",
+    "BaseHP": 115.0,
+    "BaseAttack": 15.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Napoleon Bone-aparte",
+    "BaseHP": 85.0,
+    "BaseAttack": 18.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Winston Chewchill",
+    "BaseHP": 130.0,
+    "BaseAttack": 11.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Bark Twain",
+    "BaseHP": 100.0,
+    "BaseAttack": 13.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Flea-o-patra",
+    "BaseHP": 90.0,
+    "BaseAttack": 16.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Santa Paws",
+    "BaseHP": 140.0,
+    "BaseAttack": 10.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "The Bark Knight",
+    "BaseHP": 125.0,
+    "BaseAttack": 13.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "The Bark-itect",
+    "BaseHP": 100.0,
+    "BaseAttack": 14.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Professor Paws",
+    "BaseHP": 95.0,
+    "BaseAttack": 15.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "The Dog-tor",
+    "BaseHP": 110.0,
+    "BaseAttack": 12.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Deputy Drool",
+    "BaseHP": 120.0,
+    "BaseAttack": 12.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Sub-Woofer",
+    "BaseHP": 90.0,
+    "BaseAttack": 17.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Sir Loin",
+    "BaseHP": 135.0,
+    "BaseAttack": 11.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Mutt-zo Ball",
+    "BaseHP": 105.0,
+    "BaseAttack": 13.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Dr. Chew-little",
+    "BaseHP": 100.0,
+    "BaseAttack": 14.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Barkley",
+    "BaseHP": 110.0,
+    "BaseAttack": 14.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Scruff McGruff",
+    "BaseHP": 115.0,
+    "BaseAttack": 15.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "William Shakespaw",
+    "BaseHP": 95.0,
+    "BaseAttack": 16.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Jane Pawsten",
+    "BaseHP": 100.0,
+    "BaseAttack": 15.0,
+    "BaseCritChance": 15
+  },
+  {
+    "Name": "Salvador Dogi",
+    "BaseHP": 80.0,
+    "BaseAttack": 19.0,
+    "BaseCritChance": 15
+  }
+]

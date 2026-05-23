@@ -1,0 +1,86 @@
+[
+    {
+        "ItemID": "CLR001",
+        "ItemName": "Woven Rope Collar",
+        "EquipmentType": "Collar",
+        "BaseHPBonus": 20.0,
+        "BaseAttackBonus": 2.0
+    },
+    {
+        "ItemID": "CLR002",
+        "ItemName": "Studded Leather Collar",
+        "EquipmentType": "Collar",
+        "BaseHPBonus": 45.0,
+        "BaseAttackBonus": 8.0
+    },
+    {
+        "ItemID": "CLR003",
+        "ItemName": "Bad Dog Spiked Collar",
+        "EquipmentType": "Collar",
+        "BaseHPBonus": 75.0,
+        "BaseAttackBonus": 18.0
+    },
+    {
+        "ItemID": "JKT001",
+        "ItemName": "Cozy Winter Fleece",
+        "EquipmentType": "Jacket",
+        "BaseHPBonus": 60.0,
+        "BaseAttackBonus": 0.0
+    },
+    {
+        "ItemID": "JKT002",
+        "ItemName": "Neon High-Vis Raincoat",
+        "EquipmentType": "Jacket",
+        "BaseHPBonus": 120.0,
+        "BaseAttackBonus": 4.0
+    },
+    {
+        "ItemID": "JKT003",
+        "ItemName": "K9 Tactical Vest",
+        "EquipmentType": "Jacket",
+        "BaseHPBonus": 240.0,
+        "BaseAttackBonus": 12.0
+    },
+    {
+        "ItemID": "PWS001",
+        "ItemName": "All-Weather Booties",
+        "EquipmentType": "Paws",
+        "BaseHPBonus": 15.0,
+        "BaseAttackBonus": 4.0
+    },
+    {
+        "ItemID": "PWS002",
+        "ItemName": "Hype-Beast Dog Sneakers",
+        "EquipmentType": "Paws",
+        "BaseHPBonus": 40.0,
+        "BaseAttackBonus": 10.0
+    },
+    {
+        "ItemID": "PWS003",
+        "ItemName": "Golden Claws",
+        "EquipmentType": "Paws",
+        "BaseHPBonus": 110.0,
+        "BaseAttackBonus": 30.0
+    },
+    {
+        "ItemID": "TOY001",
+        "ItemName": "Chewed Up Tennis Ball",
+        "EquipmentType": "Toy",
+        "BaseHPBonus": 10.0,
+        "BaseAttackBonus": 6.0
+    },
+    {
+        "ItemID": "TOY002",
+        "ItemName": "Neon Aero-Frisbee",
+        "EquipmentType": "Toy",
+        "BaseHPBonus": 30.0,
+        "BaseAttackBonus": 16.0
+    },
+    {
+        "ItemID": "TOY003",
+        "ItemName": "Squeaky Rubber Chicken",
+        "EquipmentType": "Toy",
+        "BaseHPBonus": 55.0,
+        "BaseAttackBonus": 28.0
+    }
+]

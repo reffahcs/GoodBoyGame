@@ -1,0 +1,252 @@
+[
+  {
+    "StageNumber": 1,
+    "StageName": "The Local Dog Park",
+    "IsBossStage": false,
+    "TicketReward": 5,
+    "GoldReward": 150,
+    "XPReward": 60,
+    "Enemies": [
+      {
+        "Name": "Grumpy Stray",
+        "MaxHP": 80,
+        "Attack": 12
+      }
+    ]
+  },
+  {
+    "StageNumber": 2,
+    "StageName": "The Vet's Waiting Room",
+    "IsBossStage": false,
+    "TicketReward": 8,
+    "GoldReward": 300,
+    "XPReward": 125,
+    "Enemies": [
+      {
+        "Name": "Anxious Boxer",
+        "MaxHP": 100,
+        "Attack": 14
+      },
+      {
+        "Name": "Evil Laser Pointer",
+        "MaxHP": 55,
+        "Attack": 18
+      }
+    ]
+  },
+  {
+    "StageNumber": 3,
+    "StageName": "The Fire Hydrant Alley",
+    "IsBossStage": false,
+    "TicketReward": 12,
+    "GoldReward": 450,
+    "XPReward": 200,
+    "Enemies": [
+      {
+        "Name": "Scrappy Terrier",
+        "MaxHP": 90,
+        "Attack": 16
+      },
+      {
+        "Name": "Alley Cat Rebel",
+        "MaxHP": 70,
+        "Attack": 22
+      },
+      {
+        "Name": "Raccoon Bandit",
+        "MaxHP": 110,
+        "Attack": 15
+      }
+    ]
+  },
+  {
+    "StageNumber": 4,
+    "StageName": "Suburban Backyard",
+    "IsBossStage": false,
+    "TicketReward": 18,
+    "GoldReward": 650,
+    "XPReward": 300,
+    "Enemies": [
+      {
+        "Name": "Hyper Frenchie",
+        "MaxHP": 95,
+        "Attack": 20
+      },
+      {
+        "Name": "Angry Mailman",
+        "MaxHP": 150,
+        "Attack": 14
+      },
+      {
+        "Name": "Sneezy Golden",
+        "MaxHP": 130,
+        "Attack": 16
+      },
+      {
+        "Name": "Chihuahua Menace",
+        "MaxHP": 60,
+        "Attack": 28
+      }
+    ]
+  },
+  {
+    "StageNumber": 5,
+    "StageName": "The Grand Kennel Clinic",
+    "IsBossStage": false,
+    "TicketReward": 25,
+    "GoldReward": 1000,
+    "XPReward": 500,
+    "Enemies": [
+      {
+        "Name": "Alpha Doberman",
+        "MaxHP": 160,
+        "Attack": 22
+      },
+      {
+        "Name": "Caffeinated Corgi",
+        "MaxHP": 110,
+        "Attack": 26
+      },
+      {
+        "Name": "Robotic Vacuum Cleaner",
+        "MaxHP": 140,
+        "Attack": 18
+      },
+      {
+        "Name": "Protective Mastiff",
+        "MaxHP": 220,
+        "Attack": 15
+      },
+      {
+        "Name": "Defiant Tomcat",
+        "MaxHP": 100,
+        "Attack": 25
+      }
+    ]
+  },
+  {
+    "StageNumber": 6,
+    "StageName": "Construction Zone Skirmish",
+    "IsBossStage": false,
+    "TicketReward": 30,
+    "GoldReward": 1200,
+    "XPReward": 650,
+    "Enemies": [
+      {
+        "Name": "Bulldozer Bulldog",
+        "MaxHP": 240,
+        "Attack": 16
+      },
+      {
+        "Name": "Scrap Metal Hound",
+        "MaxHP": 150,
+        "Attack": 24
+      }
+    ]
+  },
+  {
+    "StageNumber": 7,
+    "StageName": "The Meatpacking District",
+    "IsBossStage": false,
+    "TicketReward": 35,
+    "GoldReward": 1500,
+    "XPReward": 800,
+    "Enemies": [
+      {
+        "Name": "Butcher's Guard Dog",
+        "MaxHP": 200,
+        "Attack": 22
+      },
+      {
+        "Name": "Sausage Thief Hound",
+        "MaxHP": 140,
+        "Attack": 26
+      },
+      {
+        "Name": "Rabid Alley Coon",
+        "MaxHP": 160,
+        "Attack": 28
+      }
+    ]
+  },
+  {
+    "StageNumber": 8,
+    "StageName": "Abandoned Subway Tracks",
+    "IsBossStage": false,
+    "TicketReward": 40,
+    "GoldReward": 1800,
+    "XPReward": 1000,
+    "Enemies": [
+      {
+        "Name": "Tunnel Rottweiler",
+        "MaxHP": 220,
+        "Attack": 24
+      },
+      {
+        "Name": "Sewer Rat Swarm",
+        "MaxHP": 120,
+        "Attack": 32
+      },
+      {
+        "Name": "Stranded Greyhound",
+        "MaxHP": 150,
+        "Attack": 30
+      },
+      {
+        "Name": "Subway Cyber Cat",
+        "MaxHP": 180,
+        "Attack": 26
+      }
+    ]
+  },
+  {
+    "StageNumber": 9,
+    "StageName": "The Downtown Skyscraper",
+    "IsBossStage": false,
+    "TicketReward": 50,
+    "GoldReward": 2200,
+    "XPReward": 1300,
+    "Enemies": [
+      {
+        "Name": "Elite Security Akita",
+        "MaxHP": 260,
+        "Attack": 25
+      },
+      {
+        "Name": "Posh Show Poodle",
+        "MaxHP": 160,
+        "Attack": 34
+      },
+      {
+        "Name": "Laser Turret Camera",
+        "MaxHP": 130,
+        "Attack": 40
+      },
+      {
+        "Name": "Hired Lab Pointer",
+        "MaxHP": 210,
+        "Attack": 28
+      },
+      {
+        "Name": "Sleek Guard Doberman",
+        "MaxHP": 230,
+        "Attack": 30
+      }
+    ]
+  },
+  {
+    "StageNumber": 10,
+    "StageName": "Dr. Doomittle's Penthouse",
+    "IsBossStage": true,
+    "TicketReward": 100,
+    "GoldReward": 5000,
+    "XPReward": 3000,
+    "Enemies": [
+      {
+        "Name": "DR. DOOMITTLE [BOSS]",
+        "MaxHP": 1450,
+        "Attack": 52
+      }
+    ]
+  }
+]
