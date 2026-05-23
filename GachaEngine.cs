@@ -6,8 +6,12 @@ public class GachaEngine
 {
     private static readonly Random rand = new Random();
 
+    // ==========================================================================
+    // 🔮 THE DETERMINISTIC MASTER ENGAGEMENT LOOP (NO COMPROMISES)
+    // ==========================================================================
     public void OpenMenu(
         List<RPGHero> roster,
+        List<HeroBlueprint> heroRegistry, // <--- NEW: Dynamic Hero Pool
         List<GearBlueprint> itemRegistry,
         InventoryManager inventory,
         ref int tickets,
@@ -18,6 +22,12 @@ public class GachaEngine
         bool inGachaMenu = true;
         while (inGachaMenu)
         {
+            // Clear buffer to ensure immediate response
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
+
             Console.Clear();
             Console.WriteLine(
                 "=========================================================================="
@@ -41,42 +51,72 @@ public class GachaEngine
             );
             Console.Write("Selection: ");
 
-            string input = Console.ReadLine()?.Trim() ?? "";
+            // Immediate reaction without needing Enter
+            ConsoleKeyInfo choice = Console.ReadKey(true);
 
-            if (input.Equals("b", StringComparison.OrdinalIgnoreCase))
+            if (choice.Key == ConsoleKey.B)
             {
                 inGachaMenu = false;
-                continue;
             }
-
-            if (input == "1")
+            else if (
+                choice.Key == ConsoleKey.D1
+                || choice.Key == ConsoleKey.NumPad1
+                || choice.Key == ConsoleKey.Enter
+            )
             {
-                if (tickets < 1)
+                bool keepRolling = true;
+                while (keepRolling)
                 {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(
-                        "\n🚨 Insufficient tickets! Clear campaign sectors or check rewards."
-                    );
-                    Console.ResetColor();
-                    System.Threading.Thread.Sleep(1000);
-                    continue;
-                }
+                    if (tickets < 1)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(
+                            "\n🚨 Insufficient tickets! Clear campaign sectors or check rewards."
+                        );
+                        Console.ResetColor();
+                        System.Threading.Thread.Sleep(1000);
+                        break;
+                    }
 
-                tickets--;
-                ExecuteThreeTieredRoll(roster, itemRegistry, inventory);
-                Console.WriteLine("\nPress Enter to continue...");
-                Console.ReadLine();
+                    tickets--;
+                    ExecuteThreeTieredRoll(roster, heroRegistry, itemRegistry, inventory);
+
+                    Console.WriteLine("\nPress [Enter] to roll again, or [B] to return...");
+
+                    while (Console.KeyAvailable)
+                    {
+                        Console.ReadKey(true);
+                    }
+                    ConsoleKeyInfo rollChoice = Console.ReadKey(true);
+
+                    if (rollChoice.Key == ConsoleKey.B)
+                    {
+                        keepRolling = false;
+                        inGachaMenu = false;
+                    }
+                    else if (rollChoice.Key == ConsoleKey.Enter)
+                    {
+                        Console.WriteLine(
+                            "\n--------------------------------------------------------------------------"
+                        );
+                    }
+                    else
+                    {
+                        keepRolling = false;
+                    }
+                }
             }
             else
             {
-                Console.WriteLine("\n🚨 Input vector invalid. Re-evaluating terminal loops...");
-                System.Threading.Thread.Sleep(1000);
+                Console.WriteLine("\n🚨 Input vector invalid.");
+                System.Threading.Thread.Sleep(500);
             }
         }
     }
 
     private void ExecuteThreeTieredRoll(
         List<RPGHero> roster,
+        List<HeroBlueprint> heroRegistry,
         List<GearBlueprint> itemRegistry,
         InventoryManager inventory
     )
@@ -95,14 +135,14 @@ public class GachaEngine
 
         if (itemRegistry == null || itemRegistry.Count == 0)
         {
-            AwardHeroPrize(roster);
+            AwardHeroPrize(roster, heroRegistry);
             return;
         }
 
         int prizeTypeRoll = rand.Next(1, 3);
         if (prizeTypeRoll == 1)
         {
-            AwardHeroPrize(roster);
+            AwardHeroPrize(roster, heroRegistry);
         }
         else
         {
@@ -110,16 +150,25 @@ public class GachaEngine
         }
     }
 
-    private void AwardHeroPrize(List<RPGHero> roster)
+    private void AwardHeroPrize(List<RPGHero> roster, List<HeroBlueprint> heroRegistry)
     {
         string rolledHeroName = "Mutt-zo Ball";
         float rolledHP = 105f;
         float rolledAtk = 13f;
 
+        // Dynamic Roll Logic
+        if (heroRegistry != null && heroRegistry.Count > 0)
+        {
+            int index = rand.Next(heroRegistry.Count);
+            HeroBlueprint rolledBlueprint = heroRegistry[index];
+
+            rolledHeroName = rolledBlueprint.Name;
+            rolledHP = rolledBlueprint.BaseHP;
+            rolledAtk = rolledBlueprint.BaseAttack;
+        }
+
         Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine(
-            $"\n🌟 CHARACTER DROP! You pulled a duplicate copy of: {rolledHeroName}!"
-        );
+        Console.WriteLine($"\n🌟 CHARACTER DROP! You pulled: {rolledHeroName}!");
         Console.ResetColor();
 
         var existingHero = roster.Find(h =>
