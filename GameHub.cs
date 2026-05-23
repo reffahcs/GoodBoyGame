@@ -90,6 +90,7 @@ public class GameHub
             ConsoleKeyInfo choiceKey = Console.ReadKey(true);
             switch (choiceKey.Key)
             {
+                // Campaign Battles
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
                     new CampaignEngine().LaunchCampaign(
@@ -102,6 +103,7 @@ public class GameHub
                     SaveGame();
                     break;
 
+                // PVP Arena
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
                     Console.Clear();
@@ -110,6 +112,7 @@ public class GameHub
                     SaveGame();
                     break;
 
+                // Roster Manager
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
                     rosterManager.OpenMenu(
@@ -121,10 +124,12 @@ public class GameHub
                     SaveGame();
                     break;
 
+                // gacha engine
                 case ConsoleKey.D4:
                 case ConsoleKey.NumPad4:
                     gachaEngine.OpenMenu(
                         playerRoster,
+                        jsonRegistry,
                         itemRegistry,
                         playerInventory,
                         ref summonTickets,
@@ -134,6 +139,7 @@ public class GameHub
                     SaveGame();
                     break;
 
+                // Save & Exit
                 case ConsoleKey.D5:
                 case ConsoleKey.NumPad5:
                     Console.WriteLine("\n💾 Packaging runtime profiles... Exiting simulation.");
