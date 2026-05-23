@@ -33,7 +33,12 @@ public class RosterManager
     // ==========================================================================
     // 🗺️ STEP 2 FLOW: ROSTER MANAGEMENT OVERVIEW (ACCESSED VIA CASE 3)
     // ==========================================================================
-    public void OpenMenu(List<RPGHero> roster, ref int gold, ref int xpChips)
+    public void OpenMenu(
+        List<RPGHero> roster,
+        InventoryManager inventory,
+        ref int gold,
+        ref int xpChips
+    )
     {
         bool inRosterMenu = true;
         while (inRosterMenu)

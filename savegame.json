@@ -1,7 +1,7 @@
 {
-  "Tickets": 100,
-  "Gold": 49854000,
-  "XPChips": 49157052,
+  "Tickets": 97,
+  "Gold": 49836533,
+  "XPChips": 49080973,
   "Roster": [
     {
       "Name": "Sherlock Bones",
@@ -77,7 +77,7 @@
       "Name": "Mutt-zo Ball",
       "Rarity": "Stray",
       "Level": 1,
-      "Quantity": 2,
+      "Quantity": 3,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -426,7 +426,7 @@
     {
       "Name": "Jane Pawsten",
       "Rarity": "Packmate",
-      "Level": 1,
+      "Level": 21,
       "Quantity": 1,
       "CritChance": 15,
       "Equipment": {
@@ -452,5 +452,28 @@
       "CurrentXP": 0
     }
   ],
-  "UnequippedBackpack": []
+  "UnequippedBackpack": [
+    {
+      "Details": {
+        "ItemID": "TOY003",
+        "ItemName": "Squeaky Rubber Chicken",
+        "EquipmentType": "Toy",
+        "TierColor": "Common",
+        "AddedHP": 55,
+        "AddedAttack": 28
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "JKT002",
+        "ItemName": "Neon High-Vis Raincoat",
+        "EquipmentType": "Jacket",
+        "TierColor": "Rare",
+        "AddedHP": 156,
+        "AddedAttack": 5
+      },
+      "Quantity": 1
+    }
+  ]
 }

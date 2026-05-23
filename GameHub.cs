@@ -1,4 +1,3 @@
-// 📁 GameHub.cs
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,7 +14,6 @@ public class GameHub
     private RosterManager rosterManager = new RosterManager();
     private List<HeroBlueprint> jsonRegistry = new List<HeroBlueprint>();
 
-    // 🌟 DETERMINISTIC SUBSYSTEM EXTENSIONS
     private InventoryManager playerInventory = new InventoryManager();
     private List<GearBlueprint> itemRegistry = new List<GearBlueprint>();
 
@@ -25,7 +23,7 @@ public class GameHub
     public void Launch()
     {
         jsonRegistry = LoadHeroDatabase();
-        itemRegistry = LoadItemDatabase(); // Hydrate static item database at boot
+        itemRegistry = LoadItemDatabase();
 
         if (!LoadGame())
         {
@@ -58,6 +56,11 @@ public class GameHub
         bool running = true;
         while (running)
         {
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
+
             Console.Clear();
             Console.WriteLine(
                 "=========================================================================="
@@ -84,13 +87,12 @@ public class GameHub
             );
             Console.Write("Choose Sector Destination: ");
 
-            string choice = Console.ReadLine()?.Trim() ?? "";
-            switch (choice)
+            ConsoleKeyInfo choiceKey = Console.ReadKey(true);
+            switch (choiceKey.Key)
             {
-                case "1":
-                    // Campaign engine parameter contract intact
-                    CampaignEngine campaignEngine = new CampaignEngine();
-                    campaignEngine.LaunchCampaign(
+                case ConsoleKey.D1:
+                case ConsoleKey.NumPad1:
+                    new CampaignEngine().LaunchCampaign(
                         playerRoster,
                         jsonRegistry,
                         ref summonTickets,
@@ -100,21 +102,27 @@ public class GameHub
                     SaveGame();
                     break;
 
-                case "2":
+                case ConsoleKey.D2:
+                case ConsoleKey.NumPad2:
                     Console.Clear();
                     Console.WriteLine("\n⚔️ Entering the Local PvP Arena matches...");
                     System.Threading.Thread.Sleep(1000);
                     SaveGame();
                     break;
 
-                case "3":
-                    // Roster Management Entry via RosterManager
-                    rosterManager.OpenMenu(playerRoster, ref playerGold, ref playerXPChips);
+                case ConsoleKey.D3:
+                case ConsoleKey.NumPad3:
+                    rosterManager.OpenMenu(
+                        playerRoster,
+                        playerInventory,
+                        ref playerGold,
+                        ref playerXPChips
+                    );
                     SaveGame();
                     break;
 
-                case "4":
-                    // 🌟 Update parameters to cleanly stream live registries down to the engine
+                case ConsoleKey.D4:
+                case ConsoleKey.NumPad4:
                     gachaEngine.OpenMenu(
                         playerRoster,
                         itemRegistry,
@@ -126,15 +134,11 @@ public class GameHub
                     SaveGame();
                     break;
 
-                case "5":
+                case ConsoleKey.D5:
+                case ConsoleKey.NumPad5:
                     Console.WriteLine("\n💾 Packaging runtime profiles... Exiting simulation.");
                     SaveGame();
                     running = false;
-                    break;
-
-                default:
-                    Console.WriteLine("\n🚨 Input vector invalid. Re-evaluating terminal loops...");
-                    System.Threading.Thread.Sleep(1000);
                     break;
             }
         }
@@ -170,10 +174,7 @@ public class GameHub
         try
         {
             if (!File.Exists(SaveFileName))
-            {
                 return false;
-            }
-
             string jsonString = File.ReadAllText(SaveFileName);
             PlayerData loadedData = JsonSerializer.Deserialize<PlayerData>(jsonString);
 
@@ -183,14 +184,9 @@ public class GameHub
                 this.playerGold = loadedData.Gold;
                 this.playerXPChips = loadedData.XPChips;
                 this.playerRoster = loadedData.Roster ?? new List<RPGHero>();
-
-                // Restore the unequipped stash payload
                 this.playerInventory.Stash =
                     loadedData.UnequippedBackpack ?? new List<InventoryItem>();
-
-                // Hydrate runtime fields right after loading from file
                 this.playerRoster = LoadAndHydratePlayerSave(this.playerRoster, this.jsonRegistry);
-
                 Console.WriteLine("\n💾 Save file loaded successfully! Welcome back.");
                 System.Threading.Thread.Sleep(1000);
                 return true;
@@ -205,24 +201,15 @@ public class GameHub
 
     private List<HeroBlueprint> LoadHeroDatabase()
     {
-        string filePath = "Heroes.json";
         try
         {
-            if (!File.Exists(filePath))
-            {
-                Console.WriteLine(
-                    $"\n🚨 File Error: Could not find '{filePath}' in your directory!"
-                );
+            if (!File.Exists("Heroes.json"))
                 return new List<HeroBlueprint>();
-            }
-
-            string jsonContent = File.ReadAllText(filePath);
-            return JsonSerializer.Deserialize<List<HeroBlueprint>>(jsonContent)
+            return JsonSerializer.Deserialize<List<HeroBlueprint>>(File.ReadAllText("Heroes.json"))
                 ?? new List<HeroBlueprint>();
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Console.WriteLine($"\n🚨 JSON Parse Failure: {ex.Message}");
             return new List<HeroBlueprint>();
         }
     }
@@ -231,13 +218,9 @@ public class GameHub
     {
         try
         {
-            if (!File.Exists(ItemsFileName))
-            {
+            if (!File.Exists("ItemsDB.json"))
                 return new List<GearBlueprint>();
-            }
-
-            string jsonContent = File.ReadAllText(ItemsFileName);
-            return JsonSerializer.Deserialize<List<GearBlueprint>>(jsonContent)
+            return JsonSerializer.Deserialize<List<GearBlueprint>>(File.ReadAllText("ItemsDB.json"))
                 ?? new List<GearBlueprint>();
         }
         catch (Exception)
@@ -253,13 +236,11 @@ public class GameHub
     {
         if (roster == null)
             return new List<RPGHero>();
-
         foreach (var hero in roster)
         {
             var blueprint = staticGachaPool.Find(b =>
                 b.Name.Equals(hero.Name, StringComparison.OrdinalIgnoreCase)
             );
-
             if (blueprint != null)
             {
                 hero.RawBaseHP = blueprint.BaseHP;
@@ -267,7 +248,6 @@ public class GameHub
                 hero.CritChance = blueprint.BaseCritChance;
             }
         }
-
         return roster;
     }
 }

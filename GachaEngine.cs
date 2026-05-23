@@ -6,9 +6,6 @@ public class GachaEngine
 {
     private static readonly Random rand = new Random();
 
-    // ==========================================================================
-    // 🔮 THE DETERMINISTIC MASTER ENGAGEMENT LOOP (NO COMPROMISES)
-    // ==========================================================================
     public void OpenMenu(
         List<RPGHero> roster,
         List<GearBlueprint> itemRegistry,
@@ -78,9 +75,6 @@ public class GachaEngine
         }
     }
 
-    // ==========================================================================
-    // 🎰 THREE-TIER PIPELINE: WIN CHECK -> TYPE CHECK -> RARITY STAT SCALE
-    // ==========================================================================
     private void ExecuteThreeTieredRoll(
         List<RPGHero> roster,
         List<GearBlueprint> itemRegistry,
@@ -90,7 +84,6 @@ public class GachaEngine
         Console.WriteLine("\n🎬 Initiating roll sequence...");
         System.Threading.Thread.Sleep(500);
 
-        // FLOW ROLL 1: Evaluate win vector against hardcoded drop rates (e.g., 40% success rate)
         int winRoll = rand.Next(1, 101);
         if (winRoll > 40)
         {
@@ -100,15 +93,13 @@ public class GachaEngine
             return;
         }
 
-        // FLOW ROLL 2: Separate prize allocation matching category availability
         if (itemRegistry == null || itemRegistry.Count == 0)
         {
-            // Forced fallback to character drops if item configuration data is missing
             AwardHeroPrize(roster);
             return;
         }
 
-        int prizeTypeRoll = rand.Next(1, 3); // Evaluates exactly to 1 or 2
+        int prizeTypeRoll = rand.Next(1, 3);
         if (prizeTypeRoll == 1)
         {
             AwardHeroPrize(roster);
@@ -155,13 +146,9 @@ public class GachaEngine
         int index = rand.Next(itemRegistry.Count);
         GearBlueprint baseBlueprint = itemRegistry[index];
 
-        // FLOW ROLL 3: The ItemEngine applies dynamic rarity coefficients to stats
         ItemInstance rolledGear = ItemEngine.RollItemRarity(baseBlueprint);
-
-        // Push directly to player unequipped inventory stash
         inventory.AddItem(rolledGear);
 
-        // Color coordinate console output matching quality level tiers
         switch (rolledGear.TierColor)
         {
             case "Legendary":
