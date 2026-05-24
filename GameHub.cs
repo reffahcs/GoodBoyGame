@@ -12,6 +12,7 @@ public class GameHub
 
     private GachaEngine gachaEngine = new GachaEngine();
     private RosterManager rosterManager = new RosterManager();
+    private UpgradeShopEngine upgradeShop = new UpgradeShopEngine();
     private List<HeroBlueprint> jsonRegistry = new List<HeroBlueprint>();
 
     private InventoryManager playerInventory = new InventoryManager();
@@ -80,7 +81,7 @@ public class GameHub
             Console.WriteLine(" [1] Launch PvE Squad Campaign Stages");
             Console.WriteLine(" [2] Enter Local PvP Arena Matches");
             Console.WriteLine(" [3] Open Roster Management (Inspect / Level Up)");
-            Console.WriteLine(" [4] Gacha Summon Shop (Spend Tickets)");
+            Console.WriteLine(" [4] Enter Shopping District (Gacha & Upgrades)");
             Console.WriteLine(" [5] Exit Game Simulation");
             Console.WriteLine(
                 "=========================================================================="
@@ -124,18 +125,10 @@ public class GameHub
                     SaveGame();
                     break;
 
-                // gacha engine
+                //Shops
                 case ConsoleKey.D4:
                 case ConsoleKey.NumPad4:
-                    gachaEngine.OpenMenu(
-                        playerRoster,
-                        jsonRegistry,
-                        itemRegistry,
-                        playerInventory,
-                        ref summonTickets,
-                        ref playerGold,
-                        ref playerXPChips
-                    );
+                    OpenShopDirectory();
                     SaveGame();
                     break;
 
@@ -146,6 +139,73 @@ public class GameHub
                     SaveGame();
                     running = false;
                     break;
+            }
+        }
+    }
+
+    private void OpenShopDirectory()
+    {
+        bool inDirectory = true;
+        while (inDirectory)
+        {
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
+
+            Console.Clear();
+            Console.WriteLine(
+                "=========================================================================="
+            );
+            Console.WriteLine(
+                "🏬                        SHOPPING DISTRICT                               🏬"
+            );
+            Console.WriteLine(
+                "=========================================================================="
+            );
+            Console.WriteLine(
+                $" Balances: 🎫 Tickets: {this.summonTickets} | 💰 Gold: {this.playerGold} | 🧪 XP Chips: {this.playerXPChips}"
+            );
+            Console.WriteLine(
+                "--------------------------------------------------------------------------"
+            );
+            Console.WriteLine(" [1] Roll for Hero (Gacha Banner)");
+            Console.WriteLine(" [2] Roll for Gear (Gacha Banner)");
+            Console.WriteLine(" [3] Enter Hero Upgrade Shop (Packs)");
+            Console.WriteLine(" [B] Return to Main Hub Menu");
+            Console.WriteLine(
+                "=========================================================================="
+            );
+            Console.Write("Selection: ");
+
+            ConsoleKeyInfo choice = Console.ReadKey(true);
+
+            if (choice.Key == ConsoleKey.B)
+            {
+                inDirectory = false;
+            }
+            else if (choice.Key == ConsoleKey.D1 || choice.Key == ConsoleKey.NumPad1)
+            {
+                gachaEngine.OpenHeroBanner(playerRoster, jsonRegistry, ref summonTickets);
+            }
+            else if (choice.Key == ConsoleKey.D2 || choice.Key == ConsoleKey.NumPad2)
+            {
+                gachaEngine.OpenGearBanner(itemRegistry, playerInventory, ref summonTickets);
+            }
+            else if (choice.Key == ConsoleKey.D3 || choice.Key == ConsoleKey.NumPad3)
+            {
+                upgradeShop.OpenMenu(
+                    playerRoster,
+                    jsonRegistry,
+                    ref summonTickets,
+                    ref playerGold,
+                    ref playerXPChips
+                );
+            }
+            else
+            {
+                Console.WriteLine("\n🚨 Input vector invalid.");
+                System.Threading.Thread.Sleep(500);
             }
         }
     }

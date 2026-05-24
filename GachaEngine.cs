@@ -7,155 +7,113 @@ public class GachaEngine
     private static readonly Random rand = new Random();
 
     // ==========================================================================
-    // 🔮 THE DETERMINISTIC MASTER ENGAGEMENT LOOP (DUAL BANNER SYSTEM)
+    // 🔮 BANNER 1: CONTINUOUS HERO PULL LOOP
     // ==========================================================================
-    public void OpenMenu(
+    public void OpenHeroBanner(
         List<RPGHero> roster,
         List<HeroBlueprint> heroRegistry,
-        List<GearBlueprint> itemRegistry,
-        InventoryManager inventory,
-        ref int tickets,
-        ref int gold,
-        ref int xpChips
+        ref int tickets
     )
     {
-        bool inGachaMenu = true;
-        while (inGachaMenu)
+        bool keepRolling = true;
+        while (keepRolling)
         {
-            // Clear buffer to ensure immediate response
-            while (Console.KeyAvailable)
-            {
-                Console.ReadKey(true);
-            }
-
             Console.Clear();
             Console.WriteLine(
                 "=========================================================================="
             );
             Console.WriteLine(
-                "🔮                         GACHA SUMMON SHOP                              🔮"
+                "🔮                         HERO SUMMON BANNER                             🔮"
             );
             Console.WriteLine(
                 "=========================================================================="
             );
-            Console.WriteLine(
-                $" Current Balances: 🎫 Tickets: {tickets} | 💰 Gold: {gold} | 🧪 XP Chips: {xpChips}"
-            );
+            Console.WriteLine($" Current Balance: 🎫 Tickets: {tickets}");
             Console.WriteLine(
                 "--------------------------------------------------------------------------"
             );
-            Console.WriteLine(" [1] Summon Hero Companion (Costs 1 Ticket)");
-            Console.WriteLine(" [2] Summon Gear & Equipment (Costs 1 Ticket)");
-            Console.WriteLine(" [B] Return to Main Hub Menu");
+
+            if (tickets < 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(
+                    "\n🚨 Insufficient tickets! Clear campaign sectors or check rewards."
+                );
+                Console.ResetColor();
+                System.Threading.Thread.Sleep(1500);
+                break;
+            }
+
+            tickets--;
+            ExecuteHeroRoll(roster, heroRegistry);
+
+            Console.WriteLine("\nPress [Enter] to roll HERO again, or [B] to return to Shops...");
+
+            while (Console.KeyAvailable)
+            {
+                Console.ReadKey(true);
+            }
+            ConsoleKeyInfo rollChoice = Console.ReadKey(true);
+
+            if (rollChoice.Key == ConsoleKey.B)
+            {
+                keepRolling = false;
+            }
+        }
+    }
+
+    // ==========================================================================
+    // 🔮 BANNER 2: CONTINUOUS GEAR PULL LOOP
+    // ==========================================================================
+    public void OpenGearBanner(
+        List<GearBlueprint> itemRegistry,
+        InventoryManager inventory,
+        ref int tickets
+    )
+    {
+        bool keepRolling = true;
+        while (keepRolling)
+        {
+            Console.Clear();
             Console.WriteLine(
                 "=========================================================================="
             );
-            Console.Write("Selection: ");
+            Console.WriteLine(
+                "⚔️                         GEAR SUMMON BANNER                             ⚔️"
+            );
+            Console.WriteLine(
+                "=========================================================================="
+            );
+            Console.WriteLine($" Current Balance: 🎫 Tickets: {tickets}");
+            Console.WriteLine(
+                "--------------------------------------------------------------------------"
+            );
 
-            ConsoleKeyInfo choice = Console.ReadKey(true);
-
-            if (choice.Key == ConsoleKey.B)
+            if (tickets < 1)
             {
-                inGachaMenu = false;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine(
+                    "\n🚨 Insufficient tickets! Clear campaign sectors or check rewards."
+                );
+                Console.ResetColor();
+                System.Threading.Thread.Sleep(1500);
+                break;
             }
-            // ==========================================
-            // BANNER 1: HERO PULL
-            // ==========================================
-            else if (choice.Key == ConsoleKey.D1 || choice.Key == ConsoleKey.NumPad1)
+
+            tickets--;
+            ExecuteGearRoll(itemRegistry, inventory);
+
+            Console.WriteLine("\nPress [Enter] to roll GEAR again, or [B] to return to Shops...");
+
+            while (Console.KeyAvailable)
             {
-                bool keepRolling = true;
-                while (keepRolling)
-                {
-                    if (tickets < 1)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(
-                            "\n🚨 Insufficient tickets! Clear campaign sectors or check rewards."
-                        );
-                        Console.ResetColor();
-                        System.Threading.Thread.Sleep(1000);
-                        break;
-                    }
-
-                    tickets--;
-                    ExecuteHeroRoll(roster, heroRegistry);
-
-                    Console.WriteLine("\nPress [Enter] to roll HERO again, or [B] to return...");
-
-                    while (Console.KeyAvailable)
-                    {
-                        Console.ReadKey(true);
-                    }
-                    ConsoleKeyInfo rollChoice = Console.ReadKey(true);
-
-                    if (rollChoice.Key == ConsoleKey.B)
-                    {
-                        keepRolling = false;
-                        inGachaMenu = false;
-                    }
-                    else if (rollChoice.Key == ConsoleKey.Enter)
-                    {
-                        Console.WriteLine(
-                            "\n--------------------------------------------------------------------------"
-                        );
-                    }
-                    else
-                    {
-                        keepRolling = false;
-                    }
-                }
+                Console.ReadKey(true);
             }
-            // ==========================================
-            // BANNER 2: GEAR PULL
-            // ==========================================
-            else if (choice.Key == ConsoleKey.D2 || choice.Key == ConsoleKey.NumPad2)
+            ConsoleKeyInfo rollChoice = Console.ReadKey(true);
+
+            if (rollChoice.Key == ConsoleKey.B)
             {
-                bool keepRolling = true;
-                while (keepRolling)
-                {
-                    if (tickets < 1)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(
-                            "\n🚨 Insufficient tickets! Clear campaign sectors or check rewards."
-                        );
-                        Console.ResetColor();
-                        System.Threading.Thread.Sleep(1000);
-                        break;
-                    }
-
-                    tickets--;
-                    ExecuteGearRoll(itemRegistry, inventory);
-
-                    Console.WriteLine("\nPress [Enter] to roll GEAR again, or [B] to return...");
-
-                    while (Console.KeyAvailable)
-                    {
-                        Console.ReadKey(true);
-                    }
-                    ConsoleKeyInfo rollChoice = Console.ReadKey(true);
-
-                    if (rollChoice.Key == ConsoleKey.B)
-                    {
-                        keepRolling = false;
-                        inGachaMenu = false;
-                    }
-                    else if (rollChoice.Key == ConsoleKey.Enter)
-                    {
-                        Console.WriteLine(
-                            "\n--------------------------------------------------------------------------"
-                        );
-                    }
-                    else
-                    {
-                        keepRolling = false;
-                    }
-                }
-            }
-            else
-            {
-                Console.WriteLine("\n🚨 Input vector invalid.");
-                System.Threading.Thread.Sleep(500);
+                keepRolling = false;
             }
         }
     }
@@ -169,7 +127,7 @@ public class GachaEngine
         System.Threading.Thread.Sleep(500);
 
         int winRoll = rand.Next(1, 101);
-        if (winRoll > 100)
+        if (winRoll > 99)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("💨 A swing and a miss! Better luck on the next pull.");
@@ -186,7 +144,7 @@ public class GachaEngine
         System.Threading.Thread.Sleep(500);
 
         int winRoll = rand.Next(1, 101);
-        if (winRoll > 25)
+        if (winRoll > 40)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine("💨 A swing and a miss! Better luck on the next pull.");
