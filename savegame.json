@@ -1,5 +1,5 @@
 {
-  "Tickets": 44,
+  "Tickets": 6,
   "Gold": 49836533,
   "XPChips": 49080973,
   "Roster": [
@@ -7,7 +7,7 @@
       "Name": "Sherlock Bones",
       "Rarity": "Stray",
       "Level": 53,
-      "Quantity": 1,
+      "Quantity": 2,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -21,7 +21,7 @@
       "Name": "Bark Twain",
       "Rarity": "Packmate",
       "Level": 11,
-      "Quantity": 1,
+      "Quantity": 2,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -35,7 +35,7 @@
       "Name": "Indiana Bones",
       "Rarity": "Stray",
       "Level": 10,
-      "Quantity": 2,
+      "Quantity": 3,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -91,7 +91,7 @@
       "Name": "Barkley",
       "Rarity": "Packmate",
       "Level": 1,
-      "Quantity": 2,
+      "Quantity": 4,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -119,7 +119,7 @@
       "Name": "Dr. Chew-little",
       "Rarity": "Stray",
       "Level": 1,
-      "Quantity": 3,
+      "Quantity": 5,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -203,7 +203,7 @@
       "Name": "The Dog-tor",
       "Rarity": "Packmate",
       "Level": 1,
-      "Quantity": 1,
+      "Quantity": 2,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -287,7 +287,7 @@
       "Name": "Sir Loin",
       "Rarity": "Stray",
       "Level": 1,
-      "Quantity": 1,
+      "Quantity": 2,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -343,7 +343,7 @@
       "Name": "William Shakespaw",
       "Rarity": "Stray",
       "Level": 1,
-      "Quantity": 1,
+      "Quantity": 2,
       "CritChance": 15,
       "Equipment": {
         "Collar": null,
@@ -450,6 +450,20 @@
         "Toy": null
       },
       "CurrentXP": 0
+    },
+    {
+      "Name": "The Bark Knight",
+      "Rarity": "Stray",
+      "Level": 1,
+      "Quantity": 2,
+      "CritChance": 15,
+      "Equipment": {
+        "Collar": null,
+        "Jacket": null,
+        "Paws": null,
+        "Toy": null
+      },
+      "CurrentXP": 0
     }
   ],
   "UnequippedBackpack": [
@@ -472,6 +486,127 @@
         "TierColor": "Rare",
         "AddedHP": 156,
         "AddedAttack": 5
+      },
+      "Quantity": 2
+    },
+    {
+      "Details": {
+        "ItemID": "CLR002",
+        "ItemName": "Studded Leather Collar",
+        "EquipmentType": "Collar",
+        "TierColor": "Common",
+        "AddedHP": 45,
+        "AddedAttack": 8
+      },
+      "Quantity": 3
+    },
+    {
+      "Details": {
+        "ItemID": "PWS003",
+        "ItemName": "Golden Claws",
+        "EquipmentType": "Paws",
+        "TierColor": "Rare",
+        "AddedHP": 143,
+        "AddedAttack": 39
+      },
+      "Quantity": 2
+    },
+    {
+      "Details": {
+        "ItemID": "PWS003",
+        "ItemName": "Golden Claws",
+        "EquipmentType": "Paws",
+        "TierColor": "Common",
+        "AddedHP": 110,
+        "AddedAttack": 30
+      },
+      "Quantity": 3
+    },
+    {
+      "Details": {
+        "ItemID": "PWS002",
+        "ItemName": "Hype-Beast Dog Sneakers",
+        "EquipmentType": "Paws",
+        "TierColor": "Rare",
+        "AddedHP": 52,
+        "AddedAttack": 13
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "JKT002",
+        "ItemName": "Neon High-Vis Raincoat",
+        "EquipmentType": "Jacket",
+        "TierColor": "Epic",
+        "AddedHP": 210,
+        "AddedAttack": 7
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "PWS003",
+        "ItemName": "Golden Claws",
+        "EquipmentType": "Paws",
+        "TierColor": "Epic",
+        "AddedHP": 192,
+        "AddedAttack": 52
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "TOY001",
+        "ItemName": "Chewed Up Tennis Ball",
+        "EquipmentType": "Toy",
+        "TierColor": "Rare",
+        "AddedHP": 13,
+        "AddedAttack": 8
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "CLR002",
+        "ItemName": "Studded Leather Collar",
+        "EquipmentType": "Collar",
+        "TierColor": "Rare",
+        "AddedHP": 58,
+        "AddedAttack": 10
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "CLR003",
+        "ItemName": "Bad Dog Spiked Collar",
+        "EquipmentType": "Collar",
+        "TierColor": "Common",
+        "AddedHP": 75,
+        "AddedAttack": 18
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "JKT002",
+        "ItemName": "Neon High-Vis Raincoat",
+        "EquipmentType": "Jacket",
+        "TierColor": "Common",
+        "AddedHP": 120,
+        "AddedAttack": 4
+      },
+      "Quantity": 1
+    },
+    {
+      "Details": {
+        "ItemID": "JKT003",
+        "ItemName": "K9 Tactical Vest",
+        "EquipmentType": "Jacket",
+        "TierColor": "Rare",
+        "AddedHP": 312,
+        "AddedAttack": 16
       },
       "Quantity": 1
     }
