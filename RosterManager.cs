@@ -31,7 +31,7 @@ public class RosterManager
     }
 
     // ==========================================================================
-    // 🗺️ STEP 2 FLOW: ROSTER MANAGEMENT OVERVIEW (ACCESSED VIA CASE 3)
+    // 🗺️ STEP 2 FLOW: ROSTER MANAGEMENT OVERVIEW
     // ==========================================================================
     public void OpenMenu(
         List<RPGHero> roster,
@@ -71,7 +71,6 @@ public class RosterManager
                 continue;
             }
 
-            // Group and sort options exactly how your original grid display logic functioned
             List<RPGHero> sortedOptions = roster
                 .OrderByDescending(r => r.Level)
                 .ThenByDescending(r => GetRarityIndex(r.Rarity))
@@ -108,7 +107,6 @@ public class RosterManager
 
             if (input.Equals("m", StringComparison.OrdinalIgnoreCase))
             {
-                // Route directly into your laboratory logic block
                 RunLabMenuFlow(sortedOptions, roster);
                 continue;
             }
@@ -119,16 +117,25 @@ public class RosterManager
                 && choiceIdx <= sortedOptions.Count
             )
             {
-                // 🗺️ FLOW STEP 3: Go down into the detailed leveling profile page
-                OpenHeroDetailProfile(sortedOptions[choiceIdx - 1], ref gold, ref xpChips);
+                OpenHeroDetailProfile(
+                    sortedOptions[choiceIdx - 1],
+                    inventory,
+                    ref gold,
+                    ref xpChips
+                );
             }
         }
     }
 
     // ==========================================================================
-    // 🗺️ STEP 3 FLOW: HERO DETAIL SCREEN (RAPID ENTER-KEY UPGRADE INTERACTION)
+    // 🗺️ STEP 3 FLOW: HERO DETAIL SCREEN & 1-TOUCH GEAR MANAGEMENT
     // ==========================================================================
-    private void OpenHeroDetailProfile(RPGHero hero, ref int gold, ref int xpChips)
+    private void OpenHeroDetailProfile(
+        RPGHero hero,
+        InventoryManager inventory,
+        ref int gold,
+        ref int xpChips
+    )
     {
         bool viewingDetails = true;
         while (viewingDetails)
@@ -143,7 +150,6 @@ public class RosterManager
             Console.ResetColor();
             Console.WriteLine("--------------------------------------------------");
 
-            // 📊 STAT VIEW SHEET
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($" ❤️ Max Hit Points:     {hero.MaxHP:F0} HP");
             Console.WriteLine($" ⚔️ Attack Level:       {hero.Attack:F0} ATK");
@@ -151,15 +157,17 @@ public class RosterManager
             Console.ResetColor();
             Console.WriteLine("--------------------------------------------------");
 
-            // 🛡️ FUTURE PROOF TOUCH SCREEN GEAR SLOTS DISPLAY
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(" [ EQUIPMENT & ARTIFACT SLOTS ]");
-            Console.WriteLine("  Collar: [ Empty ]           Paws:   [ Empty ]");
-            Console.WriteLine("  Jacket: [ Empty ]           Toy:    [ Empty ]");
+
+            PrintGearSlot("Collar", hero.Equipment?.Collar, "1");
+            PrintGearSlot("Jacket", hero.Equipment?.Jacket, "2");
+            PrintGearSlot("Paws", hero.Equipment?.Paws, "3");
+            PrintGearSlot("Toy", hero.Equipment?.Toy, "4");
+
             Console.ResetColor();
             Console.WriteLine("--------------------------------------------------");
 
-            // Pull dynamic mathematical pricing right from your scaling formulas inside RPGHero.cs
             int xpCost = hero.XPRequiredForNextLevel;
             int goldCost = hero.GoldCostForNextLevel;
 
@@ -180,16 +188,38 @@ public class RosterManager
 
             Console.WriteLine("==================================================");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(" 🟢 Press [ENTER] to instantly Level Up");
+            Console.WriteLine(" 🟢 [ENTER] Instant Level Up");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(" 🛡️ [1-4] Manage Gear Slot   [A] Auto-Equip Best");
+            Console.WriteLine(" 🧹 [X] Strip All Gear");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(" 🔴 Press [B] to return to Pack Roster List");
+            Console.WriteLine(" 🔴 [B] Return to Pack Roster List");
             Console.ResetColor();
             Console.WriteLine("==================================================");
 
-            // Snaps keyboard input from buffer instantly without requiring an input line enter
+            // 1-Touch intercept! No Enter key required.
             ConsoleKeyInfo keyStroke = Console.ReadKey(intercept: true);
 
-            if (keyStroke.Key == ConsoleKey.Enter)
+            if (keyStroke.Key == ConsoleKey.A)
+            {
+                EquipmentEngine.AutoEquipBestGear(hero, inventory);
+                System.Threading.Thread.Sleep(1500);
+            }
+            else if (keyStroke.Key == ConsoleKey.X)
+            {
+                EquipmentEngine.UnequipAll(hero, inventory);
+                System.Threading.Thread.Sleep(1200);
+            }
+            // Route to 1-Touch Submenus
+            else if (keyStroke.KeyChar == '1')
+                OpenSlotManager(hero, "Collar", inventory);
+            else if (keyStroke.KeyChar == '2')
+                OpenSlotManager(hero, "Jacket", inventory);
+            else if (keyStroke.KeyChar == '3')
+                OpenSlotManager(hero, "Paws", inventory);
+            else if (keyStroke.KeyChar == '4')
+                OpenSlotManager(hero, "Toy", inventory);
+            else if (keyStroke.Key == ConsoleKey.Enter)
             {
                 if (hero.Level >= hero.MaxLevelCap)
                 {
@@ -206,7 +236,7 @@ public class RosterManager
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine($"\n✨ LEVEL UP! {hero.Name} is now Level {hero.Level}! ✨");
                     Console.ResetColor();
-                    System.Threading.Thread.Sleep(180); // Quick snappy feedback pacing
+                    System.Threading.Thread.Sleep(180);
                 }
                 else
                 {
@@ -230,7 +260,131 @@ public class RosterManager
     }
 
     // ==========================================================================
-    // 🧪 BREEDING LABORATORY SYSTEM SUB-CONTEXT (Your original fusion system)
+    // ⚡ 1-TOUCH SLOT MANAGER
+    // ==========================================================================
+    private void OpenSlotManager(RPGHero hero, string slotName, InventoryManager inventory)
+    {
+        // Sort by pure stats so the best gear naturally populates the 1-9 hotkeys
+        var availableGear = inventory
+            .Stash.Where(i =>
+                i.Details.EquipmentType.Equals(slotName, StringComparison.OrdinalIgnoreCase)
+            )
+            .OrderByDescending(i => i.Details.AddedHP + i.Details.AddedAttack)
+            .ToList();
+
+        Console.Clear();
+        Console.WriteLine($"==================================================");
+        Console.WriteLine($"🎒 MANAGE {slotName.ToUpper()}");
+        Console.WriteLine($"==================================================");
+
+        ItemInstance current = slotName switch
+        {
+            "Collar" => hero.Equipment?.Collar,
+            "Jacket" => hero.Equipment?.Jacket,
+            "Paws" => hero.Equipment?.Paws,
+            "Toy" => hero.Equipment?.Toy,
+            _ => null,
+        };
+
+        Console.Write(" Current: ");
+        if (current != null)
+        {
+            Console.ForegroundColor = GetRarityColor(current.TierColor);
+            Console.Write("● ");
+            Console.ResetColor();
+            Console.WriteLine($"[{current.TierColor}] {current.ItemName}");
+        }
+        else
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine("[ Empty ]");
+            Console.ResetColor();
+        }
+        Console.WriteLine("--------------------------------------------------");
+
+        if (availableGear.Count == 0)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine($" No unequipped {slotName} items in backpack.");
+            Console.ResetColor();
+        }
+        else
+        {
+            // Limit loop to 9 to guarantee 1-touch numeric mapping
+            for (int i = 0; i < availableGear.Count && i < 9; i++)
+            {
+                var item = availableGear[i].Details;
+                Console.Write($" [{i + 1}] ");
+
+                Console.ForegroundColor = GetRarityColor(item.TierColor);
+                Console.Write("● ");
+                Console.ResetColor();
+
+                Console.WriteLine(
+                    $"[{item.TierColor}] {item.ItemName} | +{item.AddedHP} HP | +{item.AddedAttack} ATK | Stock: {availableGear[i].Quantity}"
+                );
+            }
+        }
+
+        Console.WriteLine("--------------------------------------------------");
+        if (current != null)
+            Console.WriteLine(" [U] Unequip Slot");
+        Console.WriteLine(" [B] Back to Profile");
+
+        // 1-Touch Intercept
+        ConsoleKeyInfo key = Console.ReadKey(true);
+
+        if ((key.Key == ConsoleKey.U || key.KeyChar == 'u') && current != null)
+        {
+            EquipmentEngine.UnequipItem(hero, slotName, inventory);
+            System.Threading.Thread.Sleep(800);
+        }
+        else if (char.IsDigit(key.KeyChar))
+        {
+            int choice = int.Parse(key.KeyChar.ToString());
+            if (choice >= 1 && choice <= availableGear.Count && choice <= 9)
+            {
+                EquipmentEngine.EquipItem(hero, availableGear[choice - 1].Details, inventory);
+                System.Threading.Thread.Sleep(800);
+            }
+        }
+    }
+
+    // ==========================================================================
+    // 🎨 UI RENDERING HELPERS
+    // ==========================================================================
+    private void PrintGearSlot(string slotName, ItemInstance item, string hotkey)
+    {
+        Console.ForegroundColor = ConsoleColor.DarkGray;
+        Console.Write($"  [{hotkey}] {slotName, -7}: ");
+
+        if (item == null)
+        {
+            Console.WriteLine("[ Empty ]");
+        }
+        else
+        {
+            Console.ForegroundColor = GetRarityColor(item.TierColor);
+            Console.Write("● ");
+            Console.ResetColor();
+            Console.WriteLine($"[{item.TierColor}] {item.ItemName}");
+        }
+    }
+
+    private ConsoleColor GetRarityColor(string rarity)
+    {
+        return rarity?.ToLower() switch
+        {
+            "common" => ConsoleColor.Gray,
+            "rare" => ConsoleColor.Blue, // Or swap to ConsoleColor.Cyan if Blue is too dark in your command prompt
+            "epic" => ConsoleColor.Magenta,
+            "legendary" => ConsoleColor.Yellow,
+            _ => ConsoleColor.Gray,
+        };
+    }
+
+    // ==========================================================================
+    // 🧪 BREEDING LABORATORY SYSTEM SUB-CONTEXT
     // ==========================================================================
     private void RunLabMenuFlow(List<RPGHero> currentSortedView, List<RPGHero> mainRoster)
     {
@@ -294,12 +448,9 @@ public class RosterManager
             return;
         }
 
-        // Process materials out of active collection stack
         targetHero.Quantity -= costToDeduct;
         if (targetHero.Quantity <= 0)
-        {
             mainRoster.Remove(targetHero);
-        }
 
         string nextRarityName = rarityScale[currentRankIndex + 1];
         targetHero.Rarity = nextRarityName;
@@ -311,9 +462,7 @@ public class RosterManager
         );
 
         if (existingStackMatch != null)
-        {
             existingStackMatch.Quantity++;
-        }
         else
         {
             targetHero.Quantity = 1;
