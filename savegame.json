@@ -1,7 +1,7 @@
 {
   "Tickets": 6,
-  "Gold": 49836533,
-  "XPChips": 49080973,
+  "Gold": 49696399,
+  "XPChips": 48321333,
   "Roster": [
     {
       "Name": "Sherlock Bones",
@@ -160,14 +160,42 @@
     {
       "Name": "Napoleon Bone-aparte",
       "Rarity": "Tracker",
-      "Level": 1,
+      "Level": 23,
       "Quantity": 1,
       "CritChance": 15,
       "Equipment": {
-        "Collar": null,
-        "Jacket": null,
-        "Paws": null,
-        "Toy": null
+        "Collar": {
+          "ItemID": "CLR002",
+          "ItemName": "Studded Leather Collar",
+          "EquipmentType": "Collar",
+          "TierColor": "Rare",
+          "AddedHP": 58,
+          "AddedAttack": 10
+        },
+        "Jacket": {
+          "ItemID": "JKT002",
+          "ItemName": "Neon High-Vis Raincoat",
+          "EquipmentType": "Jacket",
+          "TierColor": "Epic",
+          "AddedHP": 210,
+          "AddedAttack": 7
+        },
+        "Paws": {
+          "ItemID": "PWS003",
+          "ItemName": "Golden Claws",
+          "EquipmentType": "Paws",
+          "TierColor": "Rare",
+          "AddedHP": 143,
+          "AddedAttack": 39
+        },
+        "Toy": {
+          "ItemID": "TOY001",
+          "ItemName": "Chewed Up Tennis Ball",
+          "EquipmentType": "Toy",
+          "TierColor": "Rare",
+          "AddedHP": 13,
+          "AddedAttack": 8
+        }
       },
       "CurrentXP": 0
     },
@@ -328,13 +356,34 @@
     {
       "Name": "Scruff McGruff",
       "Rarity": "Tracker",
-      "Level": 1,
+      "Level": 49,
       "Quantity": 2,
       "CritChance": 15,
       "Equipment": {
-        "Collar": null,
-        "Jacket": null,
-        "Paws": null,
+        "Collar": {
+          "ItemID": "CLR002",
+          "ItemName": "Studded Leather Collar",
+          "EquipmentType": "Collar",
+          "TierColor": "Common",
+          "AddedHP": 45,
+          "AddedAttack": 8
+        },
+        "Jacket": {
+          "ItemID": "JKT002",
+          "ItemName": "Neon High-Vis Raincoat",
+          "EquipmentType": "Jacket",
+          "TierColor": "Rare",
+          "AddedHP": 156,
+          "AddedAttack": 5
+        },
+        "Paws": {
+          "ItemID": "PWS003",
+          "ItemName": "Golden Claws",
+          "EquipmentType": "Paws",
+          "TierColor": "Rare",
+          "AddedHP": 143,
+          "AddedAttack": 39
+        },
         "Toy": null
       },
       "CurrentXP": 0
@@ -342,14 +391,42 @@
     {
       "Name": "William Shakespaw",
       "Rarity": "Stray",
-      "Level": 1,
+      "Level": 9,
       "Quantity": 2,
       "CritChance": 15,
       "Equipment": {
-        "Collar": null,
-        "Jacket": null,
-        "Paws": null,
-        "Toy": null
+        "Collar": {
+          "ItemID": "CLR003",
+          "ItemName": "Bad Dog Spiked Collar",
+          "EquipmentType": "Collar",
+          "TierColor": "Common",
+          "AddedHP": 75,
+          "AddedAttack": 18
+        },
+        "Jacket": {
+          "ItemID": "JKT003",
+          "ItemName": "K9 Tactical Vest",
+          "EquipmentType": "Jacket",
+          "TierColor": "Rare",
+          "AddedHP": 312,
+          "AddedAttack": 16
+        },
+        "Paws": {
+          "ItemID": "PWS003",
+          "ItemName": "Golden Claws",
+          "EquipmentType": "Paws",
+          "TierColor": "Epic",
+          "AddedHP": 192,
+          "AddedAttack": 52
+        },
+        "Toy": {
+          "ItemID": "TOY003",
+          "ItemName": "Squeaky Rubber Chicken",
+          "EquipmentType": "Toy",
+          "TierColor": "Common",
+          "AddedHP": 55,
+          "AddedAttack": 28
+        }
       },
       "CurrentXP": 0
     },
@@ -469,17 +546,6 @@
   "UnequippedBackpack": [
     {
       "Details": {
-        "ItemID": "TOY003",
-        "ItemName": "Squeaky Rubber Chicken",
-        "EquipmentType": "Toy",
-        "TierColor": "Common",
-        "AddedHP": 55,
-        "AddedAttack": 28
-      },
-      "Quantity": 1
-    },
-    {
-      "Details": {
         "ItemID": "JKT002",
         "ItemName": "Neon High-Vis Raincoat",
         "EquipmentType": "Jacket",
@@ -487,7 +553,7 @@
         "AddedHP": 156,
         "AddedAttack": 5
       },
-      "Quantity": 2
+      "Quantity": 1
     },
     {
       "Details": {
@@ -497,17 +563,6 @@
         "TierColor": "Common",
         "AddedHP": 45,
         "AddedAttack": 8
-      },
-      "Quantity": 3
-    },
-    {
-      "Details": {
-        "ItemID": "PWS003",
-        "ItemName": "Golden Claws",
-        "EquipmentType": "Paws",
-        "TierColor": "Rare",
-        "AddedHP": 143,
-        "AddedAttack": 39
       },
       "Quantity": 2
     },
@@ -538,75 +593,9 @@
         "ItemID": "JKT002",
         "ItemName": "Neon High-Vis Raincoat",
         "EquipmentType": "Jacket",
-        "TierColor": "Epic",
-        "AddedHP": 210,
-        "AddedAttack": 7
-      },
-      "Quantity": 1
-    },
-    {
-      "Details": {
-        "ItemID": "PWS003",
-        "ItemName": "Golden Claws",
-        "EquipmentType": "Paws",
-        "TierColor": "Epic",
-        "AddedHP": 192,
-        "AddedAttack": 52
-      },
-      "Quantity": 1
-    },
-    {
-      "Details": {
-        "ItemID": "TOY001",
-        "ItemName": "Chewed Up Tennis Ball",
-        "EquipmentType": "Toy",
-        "TierColor": "Rare",
-        "AddedHP": 13,
-        "AddedAttack": 8
-      },
-      "Quantity": 1
-    },
-    {
-      "Details": {
-        "ItemID": "CLR002",
-        "ItemName": "Studded Leather Collar",
-        "EquipmentType": "Collar",
-        "TierColor": "Rare",
-        "AddedHP": 58,
-        "AddedAttack": 10
-      },
-      "Quantity": 1
-    },
-    {
-      "Details": {
-        "ItemID": "CLR003",
-        "ItemName": "Bad Dog Spiked Collar",
-        "EquipmentType": "Collar",
-        "TierColor": "Common",
-        "AddedHP": 75,
-        "AddedAttack": 18
-      },
-      "Quantity": 1
-    },
-    {
-      "Details": {
-        "ItemID": "JKT002",
-        "ItemName": "Neon High-Vis Raincoat",
-        "EquipmentType": "Jacket",
         "TierColor": "Common",
         "AddedHP": 120,
         "AddedAttack": 4
-      },
-      "Quantity": 1
-    },
-    {
-      "Details": {
-        "ItemID": "JKT003",
-        "ItemName": "K9 Tactical Vest",
-        "EquipmentType": "Jacket",
-        "TierColor": "Rare",
-        "AddedHP": 312,
-        "AddedAttack": 16
       },
       "Quantity": 1
     }

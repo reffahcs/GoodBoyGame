@@ -8,6 +8,7 @@ public class CharacterScreen
     public void OpenMenu(
         List<RPGHero> roster,
         List<HeroBlueprint> registry,
+        InventoryManager inventory, // <-- ADDED DEPENDENCY
         ref int gold,
         ref int xpChips
     )
@@ -48,7 +49,6 @@ public class CharacterScreen
                 continue;
             }
 
-            // Display a distinct unique list of characters currently owned
             for (int i = 0; i < roster.Count; i++)
             {
                 var h = roster[i];
@@ -67,7 +67,6 @@ public class CharacterScreen
             Console.Write("Select a companion profile to inspect: ");
 
             string input = Console.ReadLine()?.Trim() ?? "";
-
             if (input.Equals("b", StringComparison.OrdinalIgnoreCase))
             {
                 inMenu = false;
@@ -80,7 +79,13 @@ public class CharacterScreen
                 && choiceIdx <= roster.Count
             )
             {
-                InspectCharacterProfile(roster[choiceIdx - 1], registry, ref gold, ref xpChips);
+                InspectCharacterProfile(
+                    roster[choiceIdx - 1],
+                    registry,
+                    inventory,
+                    ref gold,
+                    ref xpChips
+                );
             }
         }
     }
@@ -88,6 +93,7 @@ public class CharacterScreen
     private void InspectCharacterProfile(
         RPGHero hero,
         List<HeroBlueprint> registry,
+        InventoryManager inventory, // <-- ADDED DEPENDENCY
         ref int gold,
         ref int xpChips
     )
@@ -95,7 +101,6 @@ public class CharacterScreen
         bool inspecting = true;
         while (inspecting)
         {
-            // Hydrate properties smoothly from standard blueprint definitions
             var blueprint = registry.Find(b =>
                 b.Name.Equals(hero.Name, StringComparison.OrdinalIgnoreCase)
             );
@@ -115,7 +120,6 @@ public class CharacterScreen
             Console.ResetColor();
             Console.WriteLine("--------------------------------------------------");
 
-            // 📊 DISPLAY STAT VALUES
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($" ❤️ Current Hit Points:  {hero.MaxHP:F0} HP");
             Console.WriteLine($" ⚔️ Core Attack Level:  {hero.Attack:F0} ATK");
@@ -123,25 +127,23 @@ public class CharacterScreen
             Console.ResetColor();
             Console.WriteLine("--------------------------------------------------");
 
-            // 🛡️ DYNAMIC EQUIP STATUS CODES
             Console.ForegroundColor = ConsoleColor.DarkGray;
             Console.WriteLine(" [ CURRENT COMPANION GEAR SLOTS ]");
             Console.WriteLine(
-                $"  Collar: {(hero.Equipment?.Collar != null ? $"🟢 {hero.Equipment.Collar.ItemName}" : "[Empty]")}"
+                $"  Collar: {(hero.Equipment?.Collar != null ? $"🟢 [{hero.Equipment.Collar.TierColor}] {hero.Equipment.Collar.ItemName}" : "[Empty]")}"
             );
             Console.WriteLine(
-                $"  Jacket: {(hero.Equipment?.Jacket != null ? $"🟢 {hero.Equipment.Jacket.ItemName}" : "[Empty]")}"
+                $"  Jacket: {(hero.Equipment?.Jacket != null ? $"🟢 [{hero.Equipment.Jacket.TierColor}] {hero.Equipment.Jacket.ItemName}" : "[Empty]")}"
             );
             Console.WriteLine(
-                $"  Paws:   {(hero.Equipment?.Paws != null ? $"🟢 {hero.Equipment.Paws.ItemName}" : "[Empty]")}"
+                $"  Paws:   {(hero.Equipment?.Paws != null ? $"🟢 [{hero.Equipment.Paws.TierColor}] {hero.Equipment.Paws.ItemName}" : "[Empty]")}"
             );
             Console.WriteLine(
-                $"  Toy:    {(hero.Equipment?.Toy != null ? $"🟢 {hero.Equipment.Toy.ItemName}" : "[Empty]")}"
+                $"  Toy:    {(hero.Equipment?.Toy != null ? $"🟢 [{hero.Equipment.Toy.TierColor}] {hero.Equipment.Toy.ItemName}" : "[Empty]")}"
             );
             Console.ResetColor();
             Console.WriteLine("--------------------------------------------------");
 
-            // 🧪 XP REQUIREMENTS
             int xpCost = hero.XPRequiredForNextLevel;
             int goldCost = hero.GoldCostForNextLevel;
 
@@ -160,16 +162,98 @@ public class CharacterScreen
 
             Console.WriteLine("==================================================");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine(" 🟢 Press [ENTER] to instantly Level Up");
+            Console.WriteLine(" 🟢 [ENTER] Instant Level Up");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(" 🛡️ [E] Equip Gear         [A] Auto-Equip Best");
+            Console.WriteLine(" 🧹 [U] Unequip Slot       [X] Strip All Gear");
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine(" 🔴 Press [B] to return to character selection grid");
+            Console.WriteLine(" 🔴 [B] Return to character selection grid");
             Console.ResetColor();
             Console.WriteLine("==================================================");
 
-            // Intercept hotkey clicks directly
             ConsoleKeyInfo key = Console.ReadKey(intercept: true);
 
-            if (key.Key == ConsoleKey.Enter)
+            // ==========================================
+            // GEAR COMMAND ROUTING
+            // ==========================================
+            if (key.Key == ConsoleKey.A)
+            {
+                EquipmentEngine.AutoEquipBestGear(hero, inventory);
+                System.Threading.Thread.Sleep(1500);
+            }
+            else if (key.Key == ConsoleKey.X)
+            {
+                EquipmentEngine.UnequipAll(hero, inventory);
+                System.Threading.Thread.Sleep(1200);
+            }
+            else if (key.Key == ConsoleKey.U)
+            {
+                Console.Write("\n Which slot to unequip? [C]ollar, [J]acket, [P]aws, [T]oy: ");
+                var slotKey = Console.ReadKey(true);
+                string target = DetermineSlotName(slotKey.Key);
+
+                if (target != "")
+                    EquipmentEngine.UnequipItem(hero, target, inventory);
+                else
+                    Console.WriteLine("\n Invalid selection.");
+
+                System.Threading.Thread.Sleep(1000);
+            }
+            else if (key.Key == ConsoleKey.E)
+            {
+                Console.Write("\n Which slot to equip? [C]ollar, [J]acket, [P]aws, [T]oy: ");
+                var slotKey = Console.ReadKey(true);
+                string target = DetermineSlotName(slotKey.Key);
+
+                if (target == "")
+                {
+                    Console.WriteLine("\n Invalid selection.");
+                    System.Threading.Thread.Sleep(800);
+                    continue;
+                }
+
+                var availableGear = inventory
+                    .Stash.Where(i =>
+                        i.Details.EquipmentType.Equals(target, StringComparison.OrdinalIgnoreCase)
+                    )
+                    .ToList();
+
+                if (availableGear.Count == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(
+                        $"\n 🚨 No unequipped {target} items found in your backpack."
+                    );
+                    Console.ResetColor();
+                    System.Threading.Thread.Sleep(1200);
+                    continue;
+                }
+
+                Console.Clear();
+                Console.WriteLine($"==================================================");
+                Console.WriteLine($"🎒 AVAILABLE {target.ToUpper()} GEAR IN BACKPACK");
+                Console.WriteLine($"==================================================");
+                for (int i = 0; i < availableGear.Count; i++)
+                {
+                    var item = availableGear[i].Details;
+                    Console.WriteLine(
+                        $" [{i + 1}] [{item.TierColor}] {item.ItemName} | +{item.AddedHP} HP | +{item.AddedAttack} ATK | Stock: {availableGear[i].Quantity}"
+                    );
+                }
+                Console.WriteLine("--------------------------------------------------");
+                Console.Write(" Select an item number to equip (or B to cancel): ");
+
+                string itemChoice = Console.ReadLine()?.Trim() ?? "";
+                if (int.TryParse(itemChoice, out int idx) && idx >= 1 && idx <= availableGear.Count)
+                {
+                    EquipmentEngine.EquipItem(hero, availableGear[idx - 1].Details, inventory);
+                    System.Threading.Thread.Sleep(1200);
+                }
+            }
+            // ==========================================
+            // EXISTING LOGIC (LEVEL UP & EXIT)
+            // ==========================================
+            else if (key.Key == ConsoleKey.Enter)
             {
                 if (hero.Level >= hero.MaxLevelCap)
                 {
@@ -191,7 +275,7 @@ public class CharacterScreen
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.WriteLine($"\n✨ LEVEL UP! {hero.Name} grew to Level {hero.Level}! ✨");
                     Console.ResetColor();
-                    System.Threading.Thread.Sleep(300); // Snappy feedback pause
+                    System.Threading.Thread.Sleep(300);
                 }
                 else
                 {
@@ -206,5 +290,17 @@ public class CharacterScreen
                 inspecting = false;
             }
         }
+    }
+
+    private string DetermineSlotName(ConsoleKey key)
+    {
+        return key switch
+        {
+            ConsoleKey.C => "Collar",
+            ConsoleKey.J => "Jacket",
+            ConsoleKey.P => "Paws",
+            ConsoleKey.T => "Toy",
+            _ => "",
+        };
     }
 }
